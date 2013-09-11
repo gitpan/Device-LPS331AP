@@ -63,11 +63,11 @@
    "provides" : {
       "Device::LPS331AP" : {
          "file" : "lib/Device/LPS331AP.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       },
       "Device::LPS331AP::Altimeter" : {
          "file" : "lib/Device/LPS331AP/Altimeter.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
@@ -82,7 +82,7 @@
          "web" : "https://github.com/shantanubhadoria/device-lps331ap"
       }
    },
-   "version" : "0.001",
+   "version" : "0.002",
    "x_contributors" : [
       "Shantanu <shantanu@cpan.org>",
       "Shantanu Bhadoria <shantanu@cpan.org>"
