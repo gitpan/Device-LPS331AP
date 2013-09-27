@@ -1,6 +1,9 @@
-package Device::LPS331AP::Altimeter;
+use strict;
+use warnings;
 
-# PODNAME: Device::LPS331AP::Altimeter
+package Device::Altimeter::LPS331AP;
+
+# PODNAME: Device::Altimeter::LPS331AP
 # ABSTRACT: I2C interface to LPS331AP Altimeter using Device::SMBus
 #
 # This file is part of Device-LPS331AP
@@ -10,16 +13,21 @@ package Device::LPS331AP::Altimeter;
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
+# Dependencies
 use 5.010;
 use Moose;
 use POSIX;
 
 # Registers for the Altimeter
+
+
 use constant { CTRL_REG1 => 0x20, };
 
 # X, Y and Z Axis magnetic Field Data value in 2's complement
+
+
 use constant {
     PRESS_OUT_H  => 0x2a,
     PRESS_OUT_L  => 0x29,
@@ -32,6 +40,7 @@ use constant {
 #use integer; # Use arithmetic right shift instead of unsigned binary right shift with >> 4
 
 extends 'Device::SMBus';
+
 
 has '+I2CDeviceAddress' => (
     is      => 'ro',
@@ -60,10 +69,12 @@ sub getRawReading {
     );
 }
 
+
 sub getPressureMillibars {
     my ($self) = @_;
     return $self->readNBytes( PRESS_OUT_XL, 3 ) / 4096;
 }
+
 
 sub getPressureInchesHg {
     my ($self) = @_;
@@ -77,6 +88,7 @@ sub getPressureToAltitudeMeters {
     my $altitude = ( 1 - ( ( $pressure / $qnh )**(0.190263) ) ) * 44330.8;
 }
 
+
 sub getTemperatureCelsius {
     my ($self) = @_;
 
@@ -84,7 +96,8 @@ sub getTemperatureCelsius {
       $self->_typecast_int_to_int16( $self->readNBytes( TEMP_OUT_L, 2 ) ) / 480;
 }
 
-sub getTemperatureFarenheit {
+
+sub getTemperatureFahrenheit {
     my ($self) = @_;
 
     return 108.5 +
@@ -100,6 +113,7 @@ sub _typecast_int_to_int32 {
     return unpack 'ss' => pack 'SS' => $_[1];
 }
 
+
 sub calibrate {
     my ($self) = @_;
 
@@ -113,11 +127,31 @@ __END__
 
 =head1 NAME
 
-Device::LPS331AP::Altimeter - I2C interface to LPS331AP Altimeter using Device::SMBus
+Device::Altimeter::LPS331AP - I2C interface to LPS331AP Altimeter using Device::SMBus
 
 =head1 VERSION
 
-version 0.003
+version 0.004
+
+=head1 REGISTERS
+
+=head2 CTRL_REG1
+
+=head2 PRESS_OUT_H
+
+=head2 PRESS_OUT_L
+
+=head2 PRESS_OUT_XL
+
+=head2 TEMP_OUT_H
+
+=head2 TEMP_OUT_L
+
+=head1 ATTRIBUTES
+
+=head2 I2CDeviceAddress
+
+Contains the I2CDevice Address for the bus on which your altimeter is connected. It would look like 0x6b. Default is 0x5d.
 
 =head1 METHODS
 
@@ -145,7 +179,15 @@ default = 1 111 0 1 1 0
 
 Return raw readings from accelerometer registers
 
-=head2
+=head2 getPressureMillibars
+
+Get pressure in Millibars
+
+=head2 getPressureInchesHg
+
+Get pressure in inches of mercury
+
+=head2 getPressureToAltitudeMeters
 
 converts pressure in mbar to altitude in meters, using 1976 US
 Standard Atmosphere model (note that this formula only applies to a
@@ -160,6 +202,18 @@ QNH is the Barometric pressure adjusted to sea level for a particular region. Th
 
 (a-((x/b)^c))*d;
 d - (x^c)*(d/b^c);
+
+=head2 getTemperatureCelsius
+
+Get Temperature in degrees celsius
+
+=head2 getTemperatureFahrenheit
+
+Get Temperature in Fahrenheit
+
+=head2 calibrate
+
+Placeholder for a calibration function
 
 =head1 AUTHOR
 

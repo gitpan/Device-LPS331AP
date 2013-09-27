@@ -23,6 +23,15 @@ QNH
 SPI
 inHg
 mbar
+CDevice
+CDeviceAddress
+Fahrenheit
+celsius
+getPressureInchesHg
+getPressureMillibars
+getPressureToAltitudeMeters
+getTemperatureCelsius
+getTemperatureFahrenheit
 Shantanu
 Bhadoria
 at
@@ -31,5 +40,5 @@ dott
 org
 lib
 Device
-LPS331AP
 Altimeter
+LPS331AP

@@ -3,7 +3,7 @@ NAME
     using Device::SMBus
 
 VERSION
-    version 0.003
+    version 0.004
 
 ATTRIBUTES
   I2CBusDevicePath
@@ -15,7 +15,7 @@ ATTRIBUTES
         $self->Altimeter->enable();
         $self->Altimeter->getReading();
 
-    This is a object of Device::LPS331AP::Altimeter
+    This is a object of Device::Altimeter::LPS331AP
 
 SUPPORT
   Bugs / Feature Requests

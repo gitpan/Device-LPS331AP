@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package Device::LPS331AP;
 
 # PODNAME: Device::LPS331AP
@@ -10,14 +13,14 @@ package Device::LPS331AP;
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
+# Dependencies
 use 5.010;
 use Moose;
 use POSIX;
 
-# Dependencies
-use Device::LPS331AP::Altimeter;
+use Device::Altimeter::LPS331AP;
 
 
 has 'I2CBusDevicePath' => ( is => 'ro', );
@@ -25,14 +28,14 @@ has 'I2CBusDevicePath' => ( is => 'ro', );
 
 has Altimeter => (
     is         => 'ro',
-    isa        => 'Device::LPS331AP::Altimeter',
+    isa        => 'Device::Altimeter::LPS331AP',
     lazy_build => 1,
 );
 
 sub _build_Altimeter {
     my ($self) = @_;
     my $obj =
-      Device::LPS331AP::Altimeter->new(
+      Device::Altimeter::LPS331AP->new(
         I2CBusDevicePath => $self->I2CBusDevicePath );
     return $obj;
 }
@@ -49,7 +52,7 @@ Device::LPS331AP - I2C interface to LPS331AP Thermometer and Barometer using Dev
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 ATTRIBUTES
 
@@ -63,7 +66,7 @@ This must be provided during object creation.
     $self->Altimeter->enable();
     $self->Altimeter->getReading();
 
-This is a object of L<Device::LPS331AP::Altimeter>
+This is a object of L<Device::Altimeter::LPS331AP>
 
 =for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
 

@@ -6,14 +6,15 @@ META.yml
 Makefile.PL
 README
 example/example.pl
+lib/Device/Altimeter/LPS331AP.pm
 lib/Device/LPS331AP.pm
-lib/Device/LPS331AP/Altimeter.pm
 t/00-compile.t
 t/00-report-prereqs.t
 t/Device-LPS331AP.t
 xt/author/critic.t
 xt/author/pod-spell.t
 xt/release/distmeta.t
+xt/release/kwalitee.t
 xt/release/minimum-version.t
 xt/release/pod-coverage.t
 xt/release/pod-syntax.t

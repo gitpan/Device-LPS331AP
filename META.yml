@@ -9,8 +9,6 @@ build_requires:
   File::Temp: 0
   List::Util: 0
   Test::More: 0
-  strict: 0
-  warnings: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
@@ -26,26 +24,29 @@ no_index:
     - xt
     - examples
     - corpus
+    - inc
   package:
     - DB
 provides:
+  Device::Altimeter::LPS331AP:
+    file: lib/Device/Altimeter/LPS331AP.pm
+    version: 0.004
   Device::LPS331AP:
     file: lib/Device/LPS331AP.pm
-    version: 0.003
-  Device::LPS331AP::Altimeter:
-    file: lib/Device/LPS331AP/Altimeter.pm
-    version: 0.003
+    version: 0.004
 requires:
   Device::SMBus: 0
   Moose: 0
   POSIX: 0
   constant: 0
   perl: 5.010
+  strict: 0
+  warnings: 0
 resources:
   bugtracker: https://github.com/shantanubhadoria/device-lps331ap/issues
   homepage: https://metacpan.org/release/Device-LPS331AP
   repository: git://github.com/shantanubhadoria/device-lps331ap.git
-version: 0.003
+version: 0.004
 x_contributors:
   - 'Shantanu <shantanu@cpan.org>'
   - 'Shantanu Bhadoria <shantanu@cpan.org>'
